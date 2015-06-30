@@ -24,9 +24,6 @@ function paramsList(params) {
   var params = params.split('in');
   var vars = params[0].split(',');
 
-  console.log(params);
-  console.log(vars);
-
   return {
     name: vars[0].replace('$', '').trim(),
     increment: vars[1] && vars[1].replace('$', '').trim(),
