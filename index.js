@@ -4,7 +4,7 @@ var list    = postcss.list;
 
 function checkParams(rule) {
   if (rule.params.indexOf('in') == -1) {
-    throw rule.error('Missed "in" keyword in @each');
+    throw rule.error('Missed "in" keyword in @foreach');
   }
 
   var params = rule.params.split('in');
@@ -12,11 +12,11 @@ function checkParams(rule) {
   var values = params[1].trim();
 
   if (!name.match(/\$[_a-zA-Z]?\w+/)) {
-    throw rule.error('Missed variable name in @each');
+    throw rule.error('Missed variable name in @foreach');
   }
 
   if (!values.match(/(\w+\,?\s?)+/)) {
-    throw rule.error('Missed values list in @each');
+    throw rule.error('Missed values list in @foreach');
   }
 }
 
@@ -58,7 +58,7 @@ module.exports = postcss.plugin('postcss-foreach', function(opts) {
   opts = opts || {};
 
   return function(css) {
-    css.eachAtRule('each', function(rule) {
+    css.eachAtRule('foreach', function(rule) {
       checkParams(rule);
       var params = paramsList(rule.params);
       processRules(rule, params);

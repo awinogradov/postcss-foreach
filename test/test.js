@@ -12,24 +12,24 @@ describe('postcss-foreach', function() {
 
   it('expects valid syntax', function() {
     var missedIn = function() {
-      test('@each $icon foo, bar {}');
+      test('@foreach $icon foo, bar {}');
     };
 
     var missedVar = function() {
-      test('@each in foo, bar {}');
+      test('@foreach in foo, bar {}');
     };
 
     var missedValues = function() {
-      test('@each $icon in {}');
+      test('@foreach $icon in {}');
     };
 
-    assert.throws(missedIn, /Missed "in" keyword in @each/);
-    assert.throws(missedVar, /Missed variable name in @each/);
-    assert.throws(missedValues, /Missed values list in @each/);
+    assert.throws(missedIn, /Missed "in" keyword in @foreach/);
+    assert.throws(missedVar, /Missed variable name in @foreach/);
+    assert.throws(missedValues, /Missed values list in @foreach/);
   });
 
   it('iterates through given values', function() {
-    var input     = '@each $icon in foo, bar { .icon-$(icon) {' +
+    var input     = '@foreach $icon in foo, bar { .icon-$(icon) {' +
                     'background: url("$(icon).png"); } }';
     var expected  = '.icon-foo {\n    background: url("foo.png")\n}\n' +
                     '.icon-bar {\n    background: url("bar.png")\n}';
@@ -37,28 +37,28 @@ describe('postcss-foreach', function() {
   });
 
   it('iterates through one value', function() {
-    var input     = '@each $icon in foo { .icon-$(icon) {' +
+    var input     = '@foreach $icon in foo { .icon-$(icon) {' +
                     'background: url("$(icon).png"); } }';
     var expected  = '.icon-foo {\n    background: url("foo.png")\n}';
     test(input, expected);
   });
 
   it('iterates short names', function() {
-    var input     = '@each $i in foo { .icon-$(i) {' +
+    var input     = '@foreach $i in foo { .icon-$(i) {' +
                     'background: url("$(i).png"); } }';
     var expected  = '.icon-foo {\n    background: url("foo.png")\n}';
     test(input, expected);
   });
 
   it('iterates vals and position', function() {
-    var input     = '@each $val, $i in foo { .icon-$(val) {' +
+    var input     = '@foreach $val, $i in foo { .icon-$(val) {' +
                     'background: url("$(val)_$(i).png"); } }';
     var expected  = '.icon-foo {\n    background: url("foo_0.png")\n}';
     test(input, expected);
   });
 
   it('respects multiple selectors', function() {
-    var input     = '@each $icon in foo, bar { .icon-$(icon), .$(icon)' +
+    var input     = '@foreach $icon in foo, bar { .icon-$(icon), .$(icon)' +
                     '{ background: url("$(icon).png"); } }';
     var expected  = '.icon-foo, .foo {\n    background: url("foo.png")\n}\n' +
                     '.icon-bar, .bar {\n    background: url("bar.png")\n}';
@@ -66,7 +66,7 @@ describe('postcss-foreach', function() {
   });
 
   it('respects multiple properties', function() {
-    var input     = '@each $icon in foo, bar { .icon-$(icon) {' +
+    var input     = '@foreach $icon in foo, bar { .icon-$(icon) {' +
                     'background: url("$(icon).png");' +
                     'content: "$(icon)";' +
                     '}}';
@@ -78,7 +78,7 @@ describe('postcss-foreach', function() {
   });
 
   it('doesn\'t replace other variables', function() {
-    var input     = '@each $icon in foo, bar { .icon-$(icon), .$(icon)' +
+    var input     = '@foreach $icon in foo, bar { .icon-$(icon), .$(icon)' +
                     '{ background: url("$(bg).png"); } }';
     var expected  = '.icon-foo, .foo {\n    background: url("$(bg).png")\n}\n' +
                     '.icon-bar, .bar {\n    background: url("$(bg).png")\n}';
