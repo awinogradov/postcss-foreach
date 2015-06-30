@@ -8,7 +8,7 @@ function test(input, expected, opts, done) {
   assert.equal(result, expected);
 };
 
-describe('postcss-each', function() {
+describe('postcss-foreach', function() {
 
   it('expects valid syntax', function() {
     var missedIn = function() {
@@ -47,6 +47,13 @@ describe('postcss-each', function() {
     var input     = '@each $i in foo { .icon-$(i) {' +
                     'background: url("$(i).png"); } }';
     var expected  = '.icon-foo {\n    background: url("foo.png")\n}';
+    test(input, expected);
+  });
+
+  it('iterates vals and position', function() {
+    var input     = '@each $val, $i in foo { .icon-$(val) {' +
+                    'background: url("$(val)_$(i).png"); } }';
+    var expected  = '.icon-foo {\n    background: url("foo_0.png")\n}';
     test(input, expected);
   });
 
