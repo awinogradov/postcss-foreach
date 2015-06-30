@@ -1,19 +1,21 @@
 {
-  "name": "postcss-each",
-  "version": "0.2.0",
+  "name": "postcss-foreach",
+  "version": "0.0.1",
   "description": "PostCSS plugin to iterate through values",
   "keywords": [
     "postcss",
     "css",
     "postcss-plugin",
+    "for",
     "each",
+    "foreach",
     "iterator"
   ],
-  "author": "Alexander Madyankin <alexander@madyankin.name>",
+  "author": "Anton Winogradov <winogradovaa@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/outpunk/postcss-each.git"
+    "url": "https://github.com/verybigman/postcss-foreach.git"
   },
   "dependencies": {
     "postcss": "^4.1.11",
